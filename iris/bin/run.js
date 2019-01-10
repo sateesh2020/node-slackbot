@@ -11,9 +11,11 @@ const server = http.createServer(service);
 const SLACK_TOKEN = process.env.SLACK_TOKEN;
 const WIT_TOKEN = process.env.WIT_TOKEN;
 
+const serviceRegistry = service.get('serviceRegistry');
+
 const wit = require('../server/witClient')(WIT_TOKEN);
 
-const rtm = slackClient.init(SLACK_TOKEN, wit);
+const rtm = slackClient.init(SLACK_TOKEN, wit, serviceRegistry);
 
 rtm.start();
 

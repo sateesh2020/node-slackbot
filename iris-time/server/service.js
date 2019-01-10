@@ -28,7 +28,7 @@ service.get('/service/:location', (req, res, next) => {
                 const result = response.body;
                 if (result.errorMessage) {
                     console.log(result.errorMessage);
-                    res.json({error: 'Failed at Time API'});
+                    res.sendStatus(500);
                 } else {
                     const timeString = moment
                         .unix(timestamp + result.dstOffset + result.rawOffset)
@@ -39,7 +39,7 @@ service.get('/service/:location', (req, res, next) => {
 
             });
         } else {
-            res.json({error: 'Failed at Geo Location API'});
+            res.sendStatus(500);
         }
 
     });
